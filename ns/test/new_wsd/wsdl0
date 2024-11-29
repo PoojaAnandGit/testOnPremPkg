@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" 
+	xmlns:p2="http://schemas.xmlsoap.org/soap/envelope/" 
+	xmlns:p1="urn:medtronic.com:PharmacyOrders" 
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" 
+	name="PharmacyOrders" targetNamespace="urn:medtronic.com:PharmacyOrders">
+	<wsp:UsingPolicy wsdl:required="true"/>
+	<wsdl:documentation/>
+	<wsp:Policy wsu:Id="OP_PharmacyOrders"/>
+	<wsp:Policy wsu:Id="OP_TestAdjudication"/>
+	<wsp:Policy wsu:Id="OP_EligibilityRequest"/>
+	<wsdl:types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+			<xs:element name="CreateOrderRequest" type="T_order"/>
+			<xs:element name="CreateOrderResponse" type="T_order"/>
+			<xs:element name="AdjudicationRequest" type="T_order"/>
+			<xs:element name="AdjudicationResponse" type="T_order"/>
+			
+			<!--  Added By Davneet for Eligibility Request Start -->
+			<xs:element name="EligibilityRequest" type="T_order"/>
+			<xs:element name="EligibilityResponse" type="T_eligibilityResponse"/>
+						
+			<xs:complexType name="T_eligibilityResponse">
+				<xs:sequence>
+					<xs:element name="orderDetails" type="T_order" minOccurs="0"/>
+					<xs:element name="metaData" type="T_metaData" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			
+			<xs:complexType name="T_metaData">
+				<xs:sequence>
+					<xs:element name="status" type="xs:string" minOccurs="0"/>
+					<xs:element name="error" type="xs:string" minOccurs="0"/>
+					<xs:element name="count" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<!--  Added By Davneet for Eligibility Request End -->
+			<xs:complexType name="T_order">
+				<xs:sequence>
+					<xs:element name="orderIdentifiers" type="T_orderIdentifiers" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="orderHeader" type="T_orderHeader" minOccurs="0"/>
+					<xs:element name="orderLineItems" type="T_orderLineItems" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_orderIdentifiers">
+				<xs:sequence>
+					<xs:element name="sourceId" type="xs:string" minOccurs="0"/>
+					<xs:element name="source" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_orderHeader">
+				<xs:sequence>
+					<xs:element name="orderType" type="xs:string" minOccurs="0"/>
+					<xs:element name="orderSubType" type="xs:string" minOccurs="0"/>
+					<xs:element name="orderCategory" type="xs:string" minOccurs="0"/>
+					<xs:element name="orderStatus" type="xs:string" minOccurs="0"/>
+					<xs:element name="orderSubStatus" type="xs:string" minOccurs="0"/>
+					<xs:element name="orderSourceRef" type="xs:string" minOccurs="0"/>
+					<xs:element name="adjudicateProcStatus" type="xs:string" minOccurs="0"/>
+					<xs:element name="customer" type="T_customer" minOccurs="0"/>
+					<xs:element name="notes" type="T_notes" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="orderShipment" type="T_orderShipment" minOccurs="0"/>
+					<xs:element name="orderAddresses" type="T_orderAddresses" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_orderLineItems">
+				<xs:sequence>
+					<xs:element name="orderLineNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="writtenDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="serviceDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="transactionIdentifiers" type="T_identifiers" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="invoiceNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="orderTransactionStatus" type="xs:string" minOccurs="0"/>
+					<xs:element name="pharmacy" type="T_pharmacy" minOccurs="0"/>
+					<xs:element name="diagnosis" type="T_diagnosis" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="documentIdentifiers" type="T_identifiers" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="product" type="T_product" minOccurs="0"/>
+					<xs:element name="payer" type="T_payer" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="collectFromPatientAmount" type="xs:string" minOccurs="0"/>
+					<xs:element name="prescriber" type="T_prescriber" minOccurs="0"/>
+					<xs:element name="insurances" type="T_insurances" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_insurances">
+				<xs:sequence>
+					<xs:element name="insuranceType" type="xs:string" minOccurs="0"/>
+					<xs:element name="insuranceResponse" type="xs:string" minOccurs="0"/>
+					<xs:element name="paidAmount" type="xs:string" minOccurs="0"/>
+					<xs:element name="insuranceName" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_scriptRejectionReasons">
+				<xs:sequence>
+					<xs:element name="lineNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="rejectionReason" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_prescriber">
+				<xs:sequence>
+					<xs:element name="alternateIds" type="T_identifiers" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+					<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+					<xs:element name="virtualAddresses" type="T_virtualAddresses" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="physicalAddresses" type="T_physicalAddresses" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_product">
+				<xs:sequence>
+					<xs:element name="productNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="productDescription" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_payer">
+				<xs:sequence>
+					<xs:element name="fsc" type="xs:string" minOccurs="0"/>
+					<xs:element name="bin" type="xs:string" minOccurs="0"/>
+					<xs:element name="pcn" type="xs:string" minOccurs="0"/>
+					<xs:element name="personCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="groupNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="patientResCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="patientRelCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="cardholderId" type="xs:string" minOccurs="0"/>
+					<xs:element name="coverageStart" type="xs:string" minOccurs="0"/>
+					<xs:element name="coverageEnd" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_pharmacy">
+				<xs:sequence>
+					<xs:element name="altIdCollection" type="T_identifiers" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="rxCollection" type="T_identifiers" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="authorizedQuantity" type="xs:string" minOccurs="0"/>
+					<xs:element name="fillNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="supplyDays" type="xs:string" minOccurs="0"/>
+					<xs:element name="dawCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="durMessageText" type="xs:string" minOccurs="0"/>
+					<xs:element name="professionalServiceCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="reasonServiceCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="resultServiceCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="priorAuthNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="priorAuthQualifier" type="xs:string" minOccurs="0"/>
+					<xs:element name="submissionClarificationCodes" type="xs:string" minOccurs="0"/>
+					<xs:element name="overrideCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="lastFillInitials" type="xs:string" minOccurs="0"/>
+					<xs:element name="dispenseInstructions" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="lineNumber" type="xs:string" minOccurs="0"/>
+								<xs:element name="instruction" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="dispenseFee" type="xs:string" minOccurs="0"/>
+					<xs:element name="usualAndCustomaryFee" type="xs:string" minOccurs="0"/>
+					<xs:element name="grossDueAmount" type="xs:string" minOccurs="0"/>
+					<xs:element name="costBasis" type="xs:string" minOccurs="0"/>
+					<xs:element name="scriptComments" type="xs:string" minOccurs="0"/>
+					<xs:element name="dispensedQuantity" type="xs:string" minOccurs="0"/>
+					<xs:element name="authorizedRefills" type="xs:string" minOccurs="0"/>
+					<xs:element name="authorizationType" type="xs:string" minOccurs="0"/>
+					<xs:element name="ingrCost" type="xs:string" minOccurs="0"/>
+					<xs:element name="contactNumber" type="T_contactNumber" minOccurs="0"/>
+					<xs:element name="scriptRejectionReasons" type="T_scriptRejectionReasons" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_contactNumber">
+				<xs:sequence>
+					<xs:element name="virtualAddressType" type="xs:string" minOccurs="0"/>
+					<xs:element name="value" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_diagnosis">
+				<xs:sequence>
+					<xs:element name="sequence" type="xs:string" minOccurs="0"/>
+					<xs:element name="dxCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="dxDescription" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_identifiers">
+				<xs:sequence>
+					<xs:element name="code" type="xs:string" minOccurs="0"/>
+					<xs:element name="value" type="xs:string" minOccurs="0"/>
+					<xs:element name="source" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_customer">
+				<xs:sequence>
+					<xs:element name="altIdCollection" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="code" type="xs:string" minOccurs="0"/>
+								<xs:element name="value" type="xs:string" minOccurs="0"/>
+								<xs:element name="source" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+					<xs:element name="middleName" type="xs:string" minOccurs="0"/>
+					<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+					<xs:element name="birthDate" type="xs:string" minOccurs="0"/>
+					<xs:element name="gender" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_notes">
+				<xs:sequence>
+					<xs:element name="noteDetails" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="note" type="xs:string" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_orderShipment">
+				<xs:sequence>
+					<xs:element name="shipmentDetails" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="shippedTo">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+											<xs:element name="middleName" type="xs:string" minOccurs="0"/>
+											<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_orderAddresses">
+				<xs:sequence>
+					<xs:element name="addressType" type="xs:string" minOccurs="0"/>
+					<xs:element name="physicalAddresses" type="T_physicalAddresses" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="virtualAddresses" type="T_virtualAddresses" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_virtualAddresses">
+				<xs:sequence>
+					<xs:element name="virtualAddressType" type="xs:string" minOccurs="0"/>
+					<xs:element name="value" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_physicalAddresses">
+				<xs:sequence>
+					<xs:element name="addressComponents" type="T_addressComponents" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="T_addressComponents">
+				<xs:sequence>
+					<xs:element name="lines" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="city" type="xs:string" minOccurs="0"/>
+					<xs:element name="region" type="xs:string" minOccurs="0"/>
+					<xs:element name="regionAbbreviation" type="xs:string" minOccurs="0"/>
+					<xs:element name="country" type="xs:string" minOccurs="0"/>
+					<xs:element name="countryCode" type="xs:string" minOccurs="0"/>
+					<xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/soap/envelope/" targetNamespace="http://schemas.xmlsoap.org/soap/envelope/">
+			<xsd:element name="Fault" type="Fault"/>
+			<xsd:complexType name="Fault" final="extension">
+				<xsd:annotation>
+					<xsd:documentation>
+               Fault reporting structure
+               </xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="faultcode" type="xsd:QName"/>
+					<xsd:element name="faultstring" type="xsd:string"/>
+					<xsd:element name="faultactor" type="xsd:anyURI" minOccurs="0"/>
+					<xsd:element name="detail" type="detail" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="detail">
+				<xsd:sequence>
+					<xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:anyAttribute processContents="lax"/>
+			</xsd:complexType>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="xmln.CreatePharmacyOrderRequest">
+		<wsdl:documentation/>
+		<wsdl:part xmlns="" name="CreateOrderRequest" element="CreateOrderRequest"/>
+	</wsdl:message>
+	<wsdl:message name="xmln.CreatePharmacyOrderResponse">
+		<wsdl:documentation/>
+		<wsdl:part xmlns="" name="CreateOrderResponse" element="CreateOrderResponse"/>
+	</wsdl:message>
+	
+	
+	<wsdl:message name="xmln.TestAdjudicationRequest">
+		<wsdl:documentation/>
+		<wsdl:part xmlns="" name="AdjudicationRequest" element="AdjudicationRequest"/>
+	</wsdl:message>
+	<wsdl:message name="xmln.TestAdjudicationResponse">
+		<wsdl:documentation/>
+		<wsdl:part xmlns="" name="AdjudicationResponse" element="AdjudicationResponse"/>
+	</wsdl:message>
+	
+	<!--  Added for EligibilityRequest Start -->
+	<wsdl:message name="xmln.EligibilityRequest">
+		<wsdl:documentation/>
+		<wsdl:part xmlns="" name="EligibilityRequest" element="EligibilityRequest"/>
+	</wsdl:message>
+	<wsdl:message name="xmln.EligibilityResponse">
+		<wsdl:documentation/>
+		<wsdl:part xmlns="" name="EligibilityResponse" element="EligibilityResponse"/>
+	</wsdl:message>
+	<!--  Added for EligibilityRequest End -->
+	
+	<wsdl:message name="p2.Fault">
+		<wsdl:documentation/>
+		<wsdl:part name="Fault" element="p2:Fault"/>
+	</wsdl:message>
+	<wsdl:portType name="PharmacyOrders">
+		<wsdl:documentation/>
+		<wsdl:operation name="PharmacyOrders">
+			<wsdl:documentation/>
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_PharmacyOrders"/>
+			</wsp:Policy>
+			<wsdl:input message="p1:xmln.CreatePharmacyOrderRequest"/>
+			<wsdl:output message="p1:xmln.CreatePharmacyOrderResponse"/>
+			<wsdl:fault name="p2.Fault" message="p1:p2.Fault"/>
+		</wsdl:operation>
+		<wsdl:operation name="TestAdjudication">
+			<wsdl:documentation/>
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_TestAdjudication"/>
+			</wsp:Policy>
+			<wsdl:input message="p1:xmln.TestAdjudicationRequest"/>
+			<wsdl:output message="p1:xmln.TestAdjudicationResponse"/>
+			<wsdl:fault name="p2.Fault" message="p1:p2.Fault"/>
+		</wsdl:operation>
+		
+		<!--  Added By Davneet for Eligibility Request Start -->
+		<wsdl:operation name="EligibilityRequest">
+			<wsdl:documentation/>
+			<wsp:Policy>
+				<wsp:PolicyReference URI="#OP_EligibilityRequest"/>
+			</wsp:Policy>
+			<wsdl:input message="p1:xmln.EligibilityRequest"/>
+			<wsdl:output message="p1:xmln.EligibilityResponse"/>
+			<wsdl:fault name="p2.Fault" message="p1:p2.Fault"/>
+		</wsdl:operation>
+		<!--  Added By Davneet for Eligibility Request End -->
+		
+	</wsdl:portType>
+	<wsdl:service name="PharmacyOrdersService">
+		<wsdl:port name="HTTP_Port" binding="p1:PharmacyOrdersBinding">
+			<soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="http://webapi-nonprod-int.medtronic.com/mdt-diabetes-pharmacyorders-papi-v1-dev/api/v1/PharmacyOrders/Process"/>
+		</wsdl:port>
+		<wsdl:port name="HTTPS_Port" binding="p1:PharmacyOrdersBinding">
+			<soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" location="https://webapi-nonprod-int.medtronic.com/mdt-diabetes-pharmacyorders-papi-v1-dev/api/v1/PharmacyOrders/Process"/>
+		</wsdl:port>
+	</wsdl:service>
+	<wsdl:binding name="PharmacyOrdersBinding" type="p1:PharmacyOrders">
+		<soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="PharmacyOrders">
+			<soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1"/>
+			<wsdl:input>
+				<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="p2.Fault">
+				<soap:fault xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" name="p2.Fault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="TestAdjudication">
+			<soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1/TestAdjudication"/>
+			<wsdl:input>
+				<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="p2.Fault">
+				<soap:fault xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" name="p2.Fault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+		<wsdl:operation name="EligibilityRequest">
+			<soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1/EligibilityRequest"/>
+			<wsdl:input>
+				<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="p2.Fault">
+				<soap:fault xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" name="p2.Fault"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		
+	</wsdl:binding>
+</wsdl:definitions>

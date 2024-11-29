@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <record name="record" javaclass="com.wm.util.Values">    <value name="node_type">record</value>
+    <value name="node_subtype">unknown</value>
+    <value name="node_nsName">test.new_wsd_.docTypes:PharmacyOrders_PharmacyOrders_Output</value>
+    <value name="node_pkg">Default</value>
+    <value name="is_public">false</value>
+    <value name="field_type">record</value>
+    <value name="field_dim">0</value>
+    <value name="nillable">true</value>
+    <value name="form_qualified">false</value>
+    <value name="is_global">false</value>
+    <value name="schemaDomain">db0b0a58e4de4c62af02ef790c2153aa</value>
+    <value name="originURI">file://C:\Users\poan\Downloads\mdt-diabetes-pharmacyorders-papi-20220203 1.wsdl</value>
+    <array name="rec_fields" type="record" depth="1">
+      <record javaclass="com.wm.util.Values">        <value name="node_type">record</value>
+        <value name="node_subtype">unknown</value>
+        <value name="is_public">false</value>
+        <value name="field_name">CreateOrderResponse</value>
+        <value name="field_type">recref</value>
+        <value name="field_dim">0</value>
+        <value name="field_opt">true</value>
+        <value name="nillable">false</value>
+        <value name="form_qualified">false</value>
+        <value name="is_global">false</value>
+        <value name="rec_closed">true</value>
+        <value name="modifiable">true</value>
+        <value name="rec_ref">test.new_wsd_.docTypes:docTypeRef_T_order</value>
+      </record>
+    </array>
+    <value name="modifiable">false</value>
+    <value name="parentWsd">test:new_wsd</value>
+    <value name="updateRSD">true</value>
+  </record>
+</Values>

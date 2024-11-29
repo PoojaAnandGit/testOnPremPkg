@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Values version="2.0">
+  <value name="node_type">webServiceDescriptor</value>
+  <value name="node_subtype">unknown</value>
+  <value name="node_nsName">test:new_wsd</value>
+  <value name="node_pkg">Default</value>
+  <value name="is_public">false</value>
+  <Boolean name="inbound">true</Boolean>
+  <Boolean name="WSICompliant">false</Boolean>
+  <value name="SOAPProtocol">SOAP 1.1 Protocol</value>
+  <value name="targetNamespace">urn:medtronic.com:PharmacyOrders</value>
+  <Boolean name="attachmentEnabled">false</Boolean>
+  <number name="mtomThreshold" type="Integer">0</number>
+  <array name="externalWSDLSources" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">      <value name="contextURI">http://localhost:5555/</value>
+      <value name="locationURI">test.new_wsd?wsdl=wsdl0</value>
+      <null name="source"/>
+      <number name="type" type="Integer">1</number>
+    </record>
+  </array>
+  <value name="externalWSDLURL">file:/C:/Users/poan/Downloads/mdt-diabetes-pharmacyorders-papi-20220203 1.wsdl</value>
+  <value name="WSDLURL">http://pie:5555/ws/test:new_wsd?WSDL</value>
+  <value name="definitionName">PharmacyOrders</value>
+  <value name="version">V_10_15</value>
+  <value name="schemaDomain">db0b0a58e4de4c62af02ef790c2153aa</value>
+  <Boolean name="rawArray">true</Boolean>
+  <array name="handlerList" type="record" depth="1">
+  </array>
+  <array name="binderList" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">      <value name="binderName">PharmacyOrdersBinding</value>
+      <value name="bindingName">PharmacyOrdersBinding</value>
+      <value name="bindingStyle">document</value>
+      <value name="bindingUse">literal</value>
+      <value name="bindingType">SOAP</value>
+      <value name="portName">HTTP_Port</value>
+      <value name="portTypeName">PharmacyOrders</value>
+      <value name="bindingTransport">http://schemas.xmlsoap.org/soap/http</value>
+      <value name="transportType">http</value>
+      <record name="operationMap" javaclass="com.wm.util.Values">        <value name="http://sap.com/xi/WebService/soap1.1/EligibilityRequest">EligibilityRequest</value>
+        <value name="http://sap.com/xi/WebService/soap1.1">PharmacyOrders</value>
+        <value name="http://sap.com/xi/WebService/soap1.1/TestAdjudication">TestAdjudication</value>
+      </record>
+      <value name="SOAPProtocol">SOAP 1.1 Protocol</value>
+      <value name="SOAPDirective">ws</value>
+      <Boolean name="useCSQ">false</Boolean>
+    </record>
+    <record javaclass="com.wm.util.Values">      <value name="binderName">PharmacyOrdersBinding_1</value>
+      <value name="bindingName">PharmacyOrdersBinding</value>
+      <value name="bindingStyle">document</value>
+      <value name="bindingUse">literal</value>
+      <value name="bindingType">SOAP</value>
+      <value name="portName">HTTPS_Port</value>
+      <value name="portTypeName">PharmacyOrders</value>
+      <value name="bindingTransport">http://schemas.xmlsoap.org/soap/http</value>
+      <value name="transportType">https</value>
+      <record name="operationMap" javaclass="com.wm.util.Values">        <value name="http://sap.com/xi/WebService/soap1.1/EligibilityRequest">EligibilityRequest</value>
+        <value name="http://sap.com/xi/WebService/soap1.1">PharmacyOrders</value>
+        <value name="http://sap.com/xi/WebService/soap1.1/TestAdjudication">TestAdjudication</value>
+      </record>
+      <value name="SOAPProtocol">SOAP 1.1 Protocol</value>
+      <value name="SOAPDirective">ws</value>
+      <Boolean name="useCSQ">false</Boolean>
+    </record>
+  </array>
+  <array name="operationList" type="record" depth="1">
+    <record javaclass="com.wm.util.Values">      <value name="operationName">PharmacyOrders</value>
+      <value name="serviceName">test.new_wsd_.services:PharmacyOrders</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">          <value name="name">urn:medtronic.com:PharmacyOrders:PharmacyOrders_PharmacyOrders_Input</value>
+          <value name="docType">test.new_wsd_.docTypes:PharmacyOrders_PharmacyOrders_Input</value>
+          <value name="nsOwner">test.new_wsd_.docTypes:PharmacyOrders_PharmacyOrders_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">          <value name="name">urn:medtronic.com:PharmacyOrders:PharmacyOrders_PharmacyOrders_Output</value>
+          <value name="docType">test.new_wsd_.docTypes:PharmacyOrders_PharmacyOrders_Output</value>
+          <value name="nsOwner">test.new_wsd_.docTypes:PharmacyOrders_PharmacyOrders_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">            <value name="name">p2.Fault</value>
+            <value name="docType">test.new_wsd_.docTypes:p2_Fault</value>
+            <value name="nsOwner">test.new_wsd_.docTypes:p2_Fault</value>
+            <number name="nsOwnerType" type="Integer">3</number>
+            <Boolean name="addedByClient">false</Boolean>
+          </record>
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">      <value name="operationName">TestAdjudication</value>
+      <value name="serviceName">test.new_wsd_.services:TestAdjudication</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">          <value name="name">urn:medtronic.com:PharmacyOrders:PharmacyOrders_TestAdjudication_Input</value>
+          <value name="docType">test.new_wsd_.docTypes:PharmacyOrders_TestAdjudication_Input</value>
+          <value name="nsOwner">test.new_wsd_.docTypes:PharmacyOrders_TestAdjudication_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">          <value name="name">urn:medtronic.com:PharmacyOrders:PharmacyOrders_TestAdjudication_Output</value>
+          <value name="docType">test.new_wsd_.docTypes:PharmacyOrders_TestAdjudication_Output</value>
+          <value name="nsOwner">test.new_wsd_.docTypes:PharmacyOrders_TestAdjudication_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">            <value name="name">p2.Fault</value>
+            <value name="docType">test.new_wsd_.docTypes:p2_Fault</value>
+            <value name="nsOwner">test.new_wsd_.docTypes:p2_Fault</value>
+            <number name="nsOwnerType" type="Integer">3</number>
+            <Boolean name="addedByClient">false</Boolean>
+          </record>
+        </array>
+      </record>
+    </record>
+    <record javaclass="com.wm.util.Values">      <value name="operationName">EligibilityRequest</value>
+      <value name="serviceName">test.new_wsd_.services:EligibilityRequest</value>
+      <value name="originalMEPType">MEP_URI_IN_OUT</value>
+      <record name="requestElement" javaclass="com.wm.util.Values">        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">          <value name="name">urn:medtronic.com:PharmacyOrders:PharmacyOrders_EligibilityRequest_Input</value>
+          <value name="docType">test.new_wsd_.docTypes:PharmacyOrders_EligibilityRequest_Input</value>
+          <value name="nsOwner">test.new_wsd_.docTypes:PharmacyOrders_EligibilityRequest_Input</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+        </array>
+      </record>
+      <record name="responseElement" javaclass="com.wm.util.Values">        <array name="headers" type="record" depth="1">
+        </array>
+        <record name="body" javaclass="com.wm.util.Values">          <value name="name">urn:medtronic.com:PharmacyOrders:PharmacyOrders_EligibilityRequest_Output</value>
+          <value name="docType">test.new_wsd_.docTypes:PharmacyOrders_EligibilityRequest_Output</value>
+          <value name="nsOwner">test.new_wsd_.docTypes:PharmacyOrders_EligibilityRequest_Output</value>
+          <number name="nsOwnerType" type="Integer">3</number>
+          <Boolean name="addedByClient">false</Boolean>
+          <null name="originalDocName"/>
+        </record>
+        <array name="faults" type="record" depth="1">
+          <record javaclass="com.wm.util.Values">            <value name="name">p2.Fault</value>
+            <value name="docType">test.new_wsd_.docTypes:p2_Fault</value>
+            <value name="nsOwner">test.new_wsd_.docTypes:p2_Fault</value>
+            <number name="nsOwnerType" type="Integer">3</number>
+            <Boolean name="addedByClient">false</Boolean>
+          </record>
+        </array>
+      </record>
+    </record>
+  </array>
+  <record name="namespaces" javaclass="com.wm.util.Values">    <value name=""></value>
+    <value name="p1">urn:medtronic.com:PharmacyOrders</value>
+    <value name="p2">http://schemas.xmlsoap.org/soap/envelope/</value>
+    <value name="wsdl">http://schemas.xmlsoap.org/wsdl/</value>
+    <value name="wsp">http://schemas.xmlsoap.org/ws/2004/09/policy</value>
+    <value name="wsu">http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd</value>
+    <value name="soap">http://schemas.xmlsoap.org/wsdl/soap/</value>
+  </record>
+  <Boolean name="HeadersInPipelineEnabled">false</Boolean>
+  <Boolean name="validateSOAPResponse">true</Boolean>
+  <Boolean name="validateSchemaUsingXerces">true</Boolean>
+  <Boolean name="enableCompatibility">false</Boolean>
+  <Boolean name="omitXSDAny">true</Boolean>
+  <record name="userDefinedURIReferencePrefixes" javaclass="com.wm.util.Values">  </record>
+  <Boolean name="registerDoctypes">true</Boolean>
+  <Boolean name="allTypes">false</Boolean>
+  <Boolean name="generateXOPObjectForBase64Binary">false</Boolean>
+  <value name="originURI">file://C:\Users\poan\Downloads\mdt-diabetes-pharmacyorders-papi-20220203 1.wsdl</value>
+  <value name="modifiable">false</value>
+  <value name="externalServiceName">{urn:medtronic.com:PharmacyOrders}PharmacyOrdersService</value>
+  <null name="policyAttachmentList"/>
+  <Boolean name="filterLoginCredentials">false</Boolean>
+</Values>
